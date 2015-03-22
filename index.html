@@ -20,6 +20,7 @@
             <p id="format" style="position: absolute;height:30px;width: 120px"></p><p id="code" style="position: absolute;left:120px"></p>
         </div>
         <script>
+
             Box = document.getElementById('barCode');
             Response = document.getElementById('response');
             document.addEventListener('deviceready', deviceReady,false);
@@ -27,8 +28,8 @@
 
             function touchStart(e) {
                 e.preventDefault();
-                cordova.plugins.barcodeScanner.scan(showBarCode,errorBarCode);
                 sound.play('start');
+                cordova.plugins.barcodeScanner.scan(showBarCode,errorBarCode);
             }
 
             function deviceReady() {
@@ -36,7 +37,6 @@
                 sound.preloadAudio('start','audio/start.mp3');
                 sound.preloadAudio('read','audio/read.mp3');
                 sound.preloadAudio('error','audio/error.mp3');
-
             }
 
             function showBarCode(result) {
@@ -47,7 +47,6 @@
                     BarCodeElement.children[1].innerHTML = result.text;
                     if ( result.cancelled ) { BarCodeElement.children[1].innerHTML = 'CANCELLED'; sound.play('error'); }
                     Box.appendChild(BarCodeElement);
-                    //setTimeout( function() { cordova.plugins.barcodeScanner.scan(showBarCode,errorBarCode); },3000);
             }
 
             function errorBarCode(error) {
